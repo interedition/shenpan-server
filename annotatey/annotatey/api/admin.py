@@ -1,6 +1,6 @@
 """Admin configuration for regula."""
 from django.contrib import admin
-from regula.backend.models import Description, Token,\
+from annotatey.api.models import Description, Token,\
     RegularisationType, Scope, Regularisation
 
 admin.site.register(Description)

@@ -3,7 +3,7 @@
 from django.conf.urls.defaults import patterns, include, url
 from djangorestframework import permissions
 from djangorestframework.views import ListOrCreateModelView, InstanceModelView
-from regula.backend.resources import DescriptionResource, \
+from annotatey.api.resources import DescriptionResource, \
     TokenResource, RegularisationTypeResource, ScopeResource, \
     RegularisationResource
 

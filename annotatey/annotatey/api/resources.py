@@ -1,6 +1,6 @@
 from django.core.urlresolvers import reverse
 from djangorestframework.resources import ModelResource
-from regula.backend.models import Description, Token,\
+from annotatey.api.models import Description, Token,\
     RegularisationType, Scope, Regularisation
 
 class DescriptionResource(ModelResource):
