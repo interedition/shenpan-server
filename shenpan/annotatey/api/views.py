@@ -49,8 +49,7 @@ class DecisionRoot(View):
 
         context = self.CONTENT['context']
         external_user = self.CONTENT['external_user']
-        if 'description' in self.CONTENT:
-            description = self.CONTENT['description']
+        system_user = self.user
 
         regularisation, created = \
             Regularisation.objects.get_or_create(token = token,
@@ -59,9 +58,11 @@ class DecisionRoot(View):
                                                  regularisation_type = regularisation_type,
                                                  context = context,
                                                  external_user = external_user,
+                                                 system_user = system_user,
                                                  )
 
         if 'description' in self.CONTENT:
+            description = self.CONTENT['description']
             reg_contenttype = ContentType.objects.get(app_label="api", model="regularisation")
             regularisation_desc = Description(text = description,
                                               external_user = external_user,
