@@ -6,19 +6,23 @@ from djangorestframework.views import ListOrCreateModelView, InstanceModelView
 from annotatey.api.resources import DescriptionResource, \
     TokenResource, RegularisationTypeResource, ScopeResource, \
     RegularisationResource
-from annotatey.api.views import DecisionRoot
+from annotatey.api.views import DecisionRoot, QueryRoot
 
 urlpatterns = patterns(
     '',
 
     url(r'^$', DecisionRoot.as_view(
-            permissions=(permissions.IsAuthenticated,)),
+            permissions=(permissions.IsUserOrIsAnonReadOnly,)),
         name='decision-root'),
+
+    url(r'^query/(?P<query>[\w-]+)/$', QueryRoot.as_view(
+            permissions=(permissions.IsUserOrIsAnonReadOnly,)),
+        name='decision-query'),
 
     url(r'^description/(?P<pk>[0-9]+)/$', \
             InstanceModelView.as_view(
                 resource=DescriptionResource,
-                permissions=(permissions.IsAuthenticated,)),
+                permissions=(permissions.IsUserOrIsAnonReadOnly,)),
         ),
     url(r'^description/$', \
             ListOrCreateModelView.as_view(
@@ -29,7 +33,7 @@ urlpatterns = patterns(
     url(r'^token/(?P<pk>[0-9]+)/$', \
             InstanceModelView.as_view(
                 resource=TokenResource,
-                permissions=(permissions.IsAuthenticated,)),
+                permissions=(permissions.IsUserOrIsAnonReadOnly,)),
         ),
     url(r'^token/$', \
             ListOrCreateModelView.as_view(
@@ -40,7 +44,7 @@ urlpatterns = patterns(
     url(r'^regularisationtype/(?P<pk>[0-9]+)/$', \
             InstanceModelView.as_view(
                 resource=RegularisationTypeResource,
-                permissions=(permissions.IsAuthenticated,)),
+                permissions=(permissions.IsUserOrIsAnonReadOnly,)),
         ),
     url(r'^regularisationtype/$', \
             ListOrCreateModelView.as_view(
@@ -51,7 +55,7 @@ urlpatterns = patterns(
     url(r'^scope/(?P<pk>[0-9]+)/$', \
             InstanceModelView.as_view(
                 resource=ScopeResource,
-                permissions=(permissions.IsAuthenticated,)),
+                permissions=(permissions.IsUserOrIsAnonReadOnly,)),
         ),
     url(r'^scope/$', \
             ListOrCreateModelView.as_view(
@@ -62,7 +66,7 @@ urlpatterns = patterns(
     url(r'^regularisation/(?P<pk>[0-9]+)/$', \
             InstanceModelView.as_view(
                 resource=RegularisationResource,
-                permissions=(permissions.IsAuthenticated,),
+                permissions=(permissions.IsUserOrIsAnonReadOnly,),
                 ), name = 'regularisation_instance'
         ),
     url(r'^regularisation/$', \

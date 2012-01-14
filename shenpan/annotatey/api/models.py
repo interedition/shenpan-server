@@ -50,8 +50,8 @@ class Scope(models.Model):
 
 class Regularisation(models.Model):
     """A mapping between the token and the lemma."""
-    token = models.ForeignKey(Token, related_name = 'tokens')
-    lemma = models.ForeignKey(Token, related_name = 'lemmas')
+    token = models.ForeignKey(Token, related_name = 'lemmas')
+    lemma = models.ForeignKey(Token, related_name = 'tokens')
     regularisation_type = models.ForeignKey(RegularisationType)
     scope = models.ForeignKey(Scope)
     context = models.CharField(max_length=255)
