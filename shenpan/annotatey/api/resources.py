@@ -14,6 +14,8 @@ class TokenResource(ModelResource):
 class RegularisationTypeResource(ModelResource):
     """A user added description."""
     model = RegularisationType
+    def descriptions(self):
+        return instance.descriptions.values_list('text', flat=True)
 
 class ScopeResource(ModelResource):
     """A user added description."""

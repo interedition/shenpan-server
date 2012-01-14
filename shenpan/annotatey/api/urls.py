@@ -6,10 +6,15 @@ from djangorestframework.views import ListOrCreateModelView, InstanceModelView
 from annotatey.api.resources import DescriptionResource, \
     TokenResource, RegularisationTypeResource, ScopeResource, \
     RegularisationResource
-
+from annotatey.api.views import DecisionRoot
 
 urlpatterns = patterns(
     '',
+
+    url(r'^$', DecisionRoot.as_view(
+            permissions=(permissions.IsAuthenticated,)),
+        name='decision-root'),
+
     url(r'^description/(?P<pk>[0-9]+)/$', \
             InstanceModelView.as_view(
                 resource=DescriptionResource,
@@ -57,7 +62,8 @@ urlpatterns = patterns(
     url(r'^regularisation/(?P<pk>[0-9]+)/$', \
             InstanceModelView.as_view(
                 resource=RegularisationResource,
-                permissions=(permissions.IsAuthenticated,)),
+                permissions=(permissions.IsAuthenticated,),
+                ), name = 'regularisation_instance'
         ),
     url(r'^regularisation/$', \
             ListOrCreateModelView.as_view(

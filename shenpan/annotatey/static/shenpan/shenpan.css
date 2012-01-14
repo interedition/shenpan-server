@@ -1,0 +1,38 @@
+﻿@charset "ISO-8859-1"
+
+/* FILE: selfhtml.css */
+/* Stylesheet for the Annotaty Website */
+
+h1,h2,h3,h4,p,ul,ol,li,div,td,th,address,blockquote,nobr,b,i {
+ font-family:Arial,sans-serif; }
+
+h1 {font-size:36px;
+    margin-bottom:18px;
+    background-color:#E0E0E0;
+    border-width:1px;
+    border-style:solid;
+    border-color:purple;
+    padding:1.5em;
+    text-align:justify;  
+    }
+
+h2 {font-size:24px;
+    margin-bottom:18px; }
+
+h3 {font-size:20px; }
+
+p,ul,ol,li,div,td,th,address,blockquote { font-size:18px; }
+
+li { margin-top:6px; }
+
+a:link { color:#3E3A5E;
+        text-decoration:underline; }
+
+a:visited { color:#3E3A5E;
+        text-decoration:underline; }
+
+a:active { color:#3E3A5E;
+        text-decoration:none; }
+
+body { background-color:#E6D3D8; }
+

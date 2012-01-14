@@ -1,0 +1,47 @@
+﻿<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01//EN">
+<html>  
+<head>
+<title>Annotation.Bham Microservice</title>
+<link rel="stylesheet" type="text/css" href="/static/shenpan/shenpan.css">
+<style type="text/css">
+</style>
+</head>
+<body>
+<table border="0">
+    <tr>
+      <th><h1>Welcome to Annotation.Bham</h1></th>
+      <th><img src="/static/shenpan/shenpan.jpg" alt="Shen-Pan" align="right" vspace="10" hspace="30" width="300"></th>
+   </tr>
+</table>
+<p>Annotation.Bham is a microservice for making and documenting textual decisions.</p>
+<p>You can access the service through the web, however, if you want to help develop the service, or run it on your own computer, you can <a href="/shenpan/">check out Shenpan.</a>
+<p>Textual editors make many decisions, such as when regularizing collations or enhancing document searches. This service aims to record those decisions, so that textual editing can be repeatable and verifiable.</p>
+<p>It is currenty in closed pre-alpha.</p>
+<h2>Use cases</h2>
+<p>We are especially targeting to two initial use cases, one related to collation of textual witnesses, another related to search in documents.</p>
+<ul>
+<li>In the first use case, editors indicate and identify relationships between variants, and the tool generates rules from that for a regularization tool rule engine, or gives the added information back to another service, such as <a href="http://gregor.middell.net/collatex/api/collate">CollateX</a>.</li>
+<li>In the second use case, scholars query documents and qualify individual hits with respect to their relevance to the search they had in mind. The tool generates rules from their decisions which can then be applied to a new, more focused or smarter search. This use case may be applied to search for lexical items, rhymes, clausulae, or even themes. </li>
+</ul>
+<h2>Basic Usage</h2>
+<p>To make a new decision requires do calling the service using a POST request and providing JSON input to <a href="http://www.annotation.bham.ac.uk/api">http://www.annotation.bham.ac.uk/api</a>. </p>
+</p>
+<p>For any single regularization or qualification based on a user decision, the following items can be stored as a new rule:</p>
+<ul>
+    <li>Token: The text for which the decision applies</li>
+    <li>Type: The type of decision: regularize or not; equivalent or not.</li>
+    <li>Context: where the user was when the decision was made</li>
+    <li>Scope: how far the decision applies: local, document, or global.</li>
+    <li>Lemma (optional): The base form for regulariation decision</li>
+    <li>External username (optional): The user that made the decision.</li>
+    <li>Description (optional): Freeform justification/description.</li>
+</ul>
+<h2>Team</h2>
+<p>Zeth, Xiaohan, Troy, Tara, Neven, Joris, Christof, @ Interedition, Leuven.</p>
+<h2>Links</h2>
+<ul>
+<li><a href="http://www.interedition.eu">Interedition</a></li>
+<li><a href="http://www.interedition.eu/wiki/index.php/RegularisationTool">Project wiki page</a></li>
+</ul>
+</body>
+</html>

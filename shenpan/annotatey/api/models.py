@@ -18,8 +18,8 @@ class Description(models.Model):
     content_object = generic.GenericForeignKey('content_type', 'object_id')
 
     def __unicode__(self):
-        return "Comment on %s %s by %s" % \
-            (self.content_object, self.content_type, self.author)
+        return "Comment on %s %s." % \
+            (self.content_object, self.content_type)
 
 
 class Token(models.Model):
@@ -65,5 +65,5 @@ class Regularisation(models.Model):
     descriptions = generic.GenericRelation(Description)
     
     def __unicode__(self):
-        return "%s to %s by %s" % \
-            (self.token, self.lemma, self.system_user)
+        return "%s to %s" % \
+            (self.token, self.lemma)
