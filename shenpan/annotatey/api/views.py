@@ -15,6 +15,8 @@ class DecisionRoot(View):
         return {'hello': 'world'}
 
     def post(self, request):
+        print dir(self.user)
+        print self.user
         token, created = Token.objects.get_or_create(text = self.CONTENT['token'])
         if self.CONTENT['lemma']:
             lemma, created = Token.objects.get_or_create(text = self.CONTENT['lemma'])
@@ -33,6 +35,7 @@ class DecisionRoot(View):
 
         context = self.CONTENT['context']
         external_user = self.CONTENT['external_user']
+        system_user = self.user
 
         regularisation, created = \
             Regularisation.objects.get_or_create(token = token,
@@ -41,6 +44,7 @@ class DecisionRoot(View):
                                                  regularisation_type = regularisation_type,
                                                  context = context,
                                                  external_user = external_user,
+                                                 system_user = system_user,
                                                  )
 
         return Response(status.HTTP_201_CREATED, headers={'Location': reverse('regularisation_instance', args=[regularisation.id])}, content = "hello")

@@ -1,0 +1,6 @@
+*.pyc
+*.swp
+*.sqlite3
+shenpan/venv
+shenpan/annotatey/settings.py
+shenpan/annotatey/wsgi.py
