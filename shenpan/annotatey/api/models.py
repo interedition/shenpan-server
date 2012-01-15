@@ -1,9 +1,9 @@
 """Models for the regularisation backend."""
 from django.db import models
+from django.db.models import Q
 from django.contrib.auth.models import User
 from django.contrib.contenttypes.models import ContentType
 from django.contrib.contenttypes import generic
-
 
 class Description(models.Model):
     """Description of something, suitable for comments and so on."""
@@ -63,7 +63,28 @@ class Regularisation(models.Model):
     date_utc = models.DateTimeField(auto_now_add=True)
 
     descriptions = generic.GenericRelation(Description)
-    
+
     def __unicode__(self):
-        return "%s to %s" % \
-            (self.token, self.lemma)
+        return "%s to %s" % (self.token, self.lemma)
+
+    @classmethod
+    def regularise(cls, token, context=None):
+        reguls = Regularisation.objects.filter(token__text=token)
+        if context:
+            #TODO: need figure out a standard context format
+            #For now only handle format: T-NT-01-4-3-16 document category token
+            document, category = context.split('-')[:2]
+            category = '%s-%s' % (document, category)
+            querys = [
+                Q(context=context, scope__name='token'),
+                Q(context__startswith=category, scope__name='category'),
+                Q(context__startswith=document, scope__name='document'),
+            ]
+        else:
+            querys = []
+        querys.append(Q(scope__name='global'))
+        for query in querys:
+            result = reguls.filter(query)
+            if result.exists():
+                return result.order_by('-date_utc')[0].lemma.text
+        return token

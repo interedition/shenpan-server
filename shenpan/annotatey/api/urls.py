@@ -6,7 +6,7 @@ from djangorestframework.views import ListOrCreateModelView, InstanceModelView
 from annotatey.api.resources import DescriptionResource, \
     TokenResource, RegularisationTypeResource, ScopeResource, \
     RegularisationResource
-from annotatey.api.views import DecisionRoot, QueryRoot
+from annotatey.api.views import DecisionRoot, QueryRoot, DumpRoot, ApplyRoot
 
 urlpatterns = patterns(
     '',
@@ -18,6 +18,14 @@ urlpatterns = patterns(
     url(r'^query/(?P<query>[\w-]+)/$', QueryRoot.as_view(
             permissions=(permissions.IsUserOrIsAnonReadOnly,)),
         name='decision-query'),
+
+    url(r'^dump/$', DumpRoot.as_view(
+            permissions=(permissions.IsUserOrIsAnonReadOnly,)),
+        name='dump-rule'),
+
+    url(r'^apply/$', ApplyRoot.as_view(
+            permissions=(permissions.IsUserOrIsAnonReadOnly,)),
+        name='apply-rule'),
 
     url(r'^description/(?P<pk>[0-9]+)/$', \
             InstanceModelView.as_view(

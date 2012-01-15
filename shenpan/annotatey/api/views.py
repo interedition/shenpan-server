@@ -21,6 +21,37 @@ class QueryRoot(View):
                 'tokens': token_list,
                 'lemmas': lemma_list}
 
+class DumpRoot(View):
+    """
+    Outputs all the rules.
+    """
+    def get(self, request):
+        return [{
+            'token': reg.token.text,
+            'lemma': reg.lemma.text,
+            'regularisation_type': reg.regularisation_type.name,
+            'scope': reg.scope.name,
+            'context': reg.context,
+            'external_user': reg.external_user,
+            'system_user': reg.system_user.username,
+        } for reg in Regularisation.objects.all()]
+
+class ApplyRoot(View):
+    """
+    Apply decision on given witness json input
+    """
+
+    def post(self, request):
+        if 'witnesses' not in self.CONTENT:
+            return Response(status.HTTP_200_OK)
+        witnesses = self.CONTENT['witnesses']
+        context = self.CONTENT.get('context')
+
+        for witness in witnesses:
+            for token_dict in witness['tokens']:
+                token_dict['t'] = Regularisation.regularise(
+                        token_dict['t'], context)
+        return witness
 
 class DecisionRoot(View):
     """
