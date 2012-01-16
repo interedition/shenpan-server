@@ -1,5 +1,5 @@
-Regula - A regulariser with many possible uses
+Shenpan - is a microservice server for making and documenting textual decisions.
 
-Regula is a web service for regularising differences between textual fragments based on user input.
+Shenpan powers http://www.annotation.bham.ac.uk/
 
-Or hopefully it will be.
+You need the code if you want to develop the service, or run it on your own machine. If you just want to use the web service, you do not need to install the server yourself. You just need to make the required REST calls.
