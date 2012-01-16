@@ -12,7 +12,10 @@ class QueryRoot(View):
     """
     List of related tokens to a token.
     """
-    def get(self, request, query):
+    def get(self, request, query = None):
+        if not query:
+            return {"detail": "Provide a token in the URL. E.g. http://www.annotation.bham.ac.uk/api/query/cat/"}
+
         query_token = Token.objects.get(text = query)
         token_list = query_token.tokens.values_list('token__text', flat = True)
         lemma_list = query_token.lemmas.values_list('lemma__text', flat = True)
@@ -58,8 +61,14 @@ class DecisionRoot(View):
     A decision about a token.
     """
     def get(self, request):
-        return {'scopes': 'http://www.annotation.bham.ac.uk/api/scope/',
-                'regularisationtype': 'http://www.annotation.bham.ac.uk/api/regularisationtype/'}
+        return {
+            '/': ['http://www.annotation.bham.ac.uk/api/', 'Add a new rule (POST)'],
+            'scopes': ['http://www.annotation.bham.ac.uk/api/scope/', 'How far the decision applies'],
+            'regularisationtype': ['http://www.annotation.bham.ac.uk/api/regularisationtype/', 'The type of decision'],
+            'query': ['http://www.annotation.bham.ac.uk/api/query/', 'Gives all the relations for a term',],
+            'dump': ['http://www.annotation.bham.ac.uk/api/dump/', 'Output all the decisions'],
+            'apply': ['http://www.annotation.bham.ac.uk/api/apply/', 'Apply the decisions to the given input (POST)'],
+                }
 
     def post(self, request):
         token, created = Token.objects.get_or_create(text = self.CONTENT['token'])

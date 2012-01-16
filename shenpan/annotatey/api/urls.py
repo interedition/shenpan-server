@@ -19,6 +19,10 @@ urlpatterns = patterns(
             permissions=(permissions.IsUserOrIsAnonReadOnly,)),
         name='decision-query'),
 
+    url(r'^query/$', QueryRoot.as_view(
+            permissions=(permissions.IsUserOrIsAnonReadOnly,)),
+        name='decision-query'),
+
     url(r'^dump/$', DumpRoot.as_view(
             permissions=(permissions.IsUserOrIsAnonReadOnly,)),
         name='dump-rule'),
